@@ -1,0 +1,35 @@
+<!-- <form action="/users" method="post">
+    <label for="username">username:</label>
+    <input type="text" name='user[username]'>
+
+    <label for="email">email:</label>
+    <input type="text" name='user[email]'>
+
+    <label for="password">password:</label>
+    <input type="text" name='user[password]'>
+
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <button type="submit">Click Me!</button>
+
+</form> -->
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @user.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: User.new do |form| %>
+  <%= form.label "Username Here:" %>
+  <%= form.text_field :username, :value => "Test" %>
+  <%= form.label :email %>
+  <%= form.email_field :email, placeholder: "email@example.com" %>
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+  <%= form.submit "Create" %>
+<% end %>
